@@ -19,7 +19,7 @@ namespace Invetory.classes
          * 3.3. search Mysql.data
          * 3.4. install mysql.data
          * 4. create variable name for connectionString
-         * 5.
+         * 5. free todo anything.
          */        
         string connectionString = "server=localhost;uid=root;pwd=password;database=inventroy";
         public bool checkDatabaseIfConnected()
@@ -56,6 +56,7 @@ namespace Invetory.classes
         }
         public bool CreateProduct(string productName, int productPrice, int productQuantity)
         {
+            // insert into inventory (database columns-name) values (@declareNewVariable)
             string query = "insert into inventory (Name, QuantityStock, Price) VALUES (@getProductNameField, @getProductQuantityField, @getProductPriceField)";
             using (MySqlConnection connectedToDatabase = new MySqlConnection(connectionString))
             {                
@@ -77,6 +78,34 @@ namespace Invetory.classes
                         return false;
                     }
                                        
+                }
+            }
+        }
+
+        public bool UpdateProduct(string productName, int productPrice, int productQuantity, int id)
+        {
+            string query = "UPDATE inventory SET Name=@getNameField, QuantityStock=@getQuantityStockField, Price=@getPriceField WHERE ProductId=@getProductIdField";
+            using (MySqlConnection connectedToDatabase = new MySqlConnection(connectionString))
+            {
+                using (MySqlCommand command = new MySqlCommand(query, connectedToDatabase))
+                {
+                    command.Parameters.AddWithValue("@getProductIdField", id);
+                    command.Parameters.AddWithValue("@getNameField", productName);
+                    command.Parameters.AddWithValue("@getQuantityStockField", productQuantity);
+                    command.Parameters.AddWithValue("@getPriceField", productPrice);
+                    try
+                    {
+                        connectedToDatabase.Open();
+                        command.ExecuteNonQuery();
+                        connectedToDatabase.Close();
+                        return true;
+                    }
+                    catch (Exception ex)
+                    {
+                        // if fail : return false
+                        return false;
+                    }
+
                 }
             }
         }

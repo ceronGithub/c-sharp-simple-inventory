@@ -42,3 +42,4 @@ C:\Users\Ceron Calsena\OneDrive\Desktop\Inventory\Invetory\Invetory\obj\Debug\In
 C:\Users\Ceron Calsena\OneDrive\Desktop\Inventory\Invetory\Invetory\obj\Debug\Invetory.exe
 C:\Users\Ceron Calsena\OneDrive\Desktop\Inventory\Invetory\Invetory\obj\Debug\Invetory.pdb
 C:\Users\Ceron Calsena\OneDrive\Desktop\Inventory\Invetory\Invetory\obj\Debug\Invetory.New_Product.resources
+C:\Users\Ceron Calsena\OneDrive\Desktop\Inventory\Invetory\Invetory\obj\Debug\Invetory.Update_Product.resources

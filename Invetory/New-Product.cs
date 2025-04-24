@@ -16,14 +16,13 @@ namespace Invetory
         classes.InventoryManager inventoryCrud = new classes.InventoryManager();
 
         public New_Product()
-        {
+        {            
             InitializeComponent();
         }
 
         private void New_Product_Load(object sender, EventArgs e)
-        {
-            
-        }
+        {            
+        }   
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -35,6 +34,8 @@ namespace Invetory
             if (isSucces == true)
             {
                 MessageBox.Show("New product has been created!", "Created new product", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Form1 f1 = new Form1();
+                f1.Show();
                 this.Close();
             }
             else

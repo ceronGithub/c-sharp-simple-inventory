@@ -51,5 +51,13 @@ namespace Invetory
             f2.Show();
             this.Hide();
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            //pass the highlighted value from datagridview. to form remove-product
+            Update_Product f3 = new Update_Product(dataGridView1.SelectedRows[0].Cells[0].Value.ToString(), dataGridView1.SelectedRows[0].Cells[1].Value.ToString(), dataGridView1.SelectedRows[0].Cells[2].Value.ToString(), dataGridView1.SelectedRows[0].Cells[3].Value.ToString());
+            f3.Show();
+            this.Hide();
+        }
     }
 }
