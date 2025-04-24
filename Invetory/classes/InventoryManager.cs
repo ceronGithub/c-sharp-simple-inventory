@@ -1,0 +1,84 @@
+﻿using MySql.Data.MySqlClient;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Invetory.classes
+{
+    class InventoryManager
+    {
+        /*
+         * 1. arrange the design
+         * 2. check mysql if it has connection and ready to make database
+         * 3. connect mysql to c# VS
+         * 3.1. right-click project name (top-right-side)
+         * 3.2. manage nuget
+         * 3.3. search Mysql.data
+         * 3.4. install mysql.data
+         * 4. create variable name for connectionString
+         * 5.
+         */        
+        string connectionString = "server=localhost;uid=root;pwd=password;database=inventroy";
+        public bool checkDatabaseIfConnected()
+        {
+            MySqlConnection sqlConnection = new MySqlConnection();
+            sqlConnection.ConnectionString = connectionString;
+            try
+            {
+                sqlConnection.Open();
+                return true;
+                sqlConnection.Close();
+            }
+            catch (Exception ex)
+            {
+                return false;            
+            }
+        }
+
+        public DataTable getData()
+        {
+            using (MySqlConnection connectedToDatabase = new MySqlConnection(connectionString))
+            {
+                string query = "SELECT * FROM inventory";
+                using (MySqlCommand command = new MySqlCommand(query, connectedToDatabase))
+                {
+                    connectedToDatabase.Open();
+                    MySqlDataReader readRecords = command.ExecuteReader();
+                    System.Data.DataTable dataTable = new DataTable();
+                    dataTable.Load(readRecords);
+                    connectedToDatabase.Close();
+                    return dataTable;                
+                }
+            }
+        }
+        public bool CreateProduct(string productName, int productPrice, int productQuantity)
+        {
+            string query = "insert into inventory (Name, QuantityStock, Price) VALUES (@getProductNameField, @getProductQuantityField, @getProductPriceField)";
+            using (MySqlConnection connectedToDatabase = new MySqlConnection(connectionString))
+            {                
+                using (MySqlCommand command = new MySqlCommand(query, connectedToDatabase))
+                {
+                    command.Parameters.AddWithValue("@getProductNameField", productName);
+                    command.Parameters.AddWithValue("@getProductQuantityField", productQuantity);
+                    command.Parameters.AddWithValue("@getProductPriceField", productPrice);
+                    try
+                    {
+                        connectedToDatabase.Open();
+                        command.ExecuteNonQuery();                        
+                        connectedToDatabase.Close();
+                        return true;
+                    }
+                    catch (Exception ex)
+                    {
+                        // if fail : return false
+                        return false;
+                    }
+                                       
+                }
+            }
+        }
+    }
+}
