@@ -59,5 +59,22 @@ namespace Invetory
             f3.Show();
             this.Hide();
         }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            //bool variable
+            bool isSucces;
+
+            //sending data to class named 'CreateProduct'
+            isSucces = inventoryCrud.DeleteProduct(Int32.Parse(dataGridView1.SelectedRows[0].Cells[0].Value.ToString()));
+            if (isSucces == true)
+            {
+                MessageBox.Show("Product has been removed!", "Removed Product", MessageBoxButtons.OK, MessageBoxIcon.Information);                
+            }
+            else
+            {
+                MessageBox.Show("Failed to remove product!", "Try-Again", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }

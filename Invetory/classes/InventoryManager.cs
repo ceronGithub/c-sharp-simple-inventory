@@ -109,5 +109,29 @@ namespace Invetory.classes
                 }
             }
         }
+
+        public bool DeleteProduct(int id)
+        {
+            string query = "DELETE FROM inventory WHERE ProductId=" + id;
+            using (MySqlConnection connectedToDatabase = new MySqlConnection(connectionString))
+            {
+                using (MySqlCommand command = new MySqlCommand(query, connectedToDatabase))
+                {                    
+                    try
+                    {
+                        connectedToDatabase.Open();
+                        command.ExecuteNonQuery();
+                        connectedToDatabase.Close();
+                        return true;
+                    }
+                    catch (Exception ex)
+                    {
+                        // if fail : return false
+                        return false;
+                    }
+
+                }
+            }
+        }
     }
 }
