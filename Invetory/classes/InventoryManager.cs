@@ -54,7 +54,7 @@ namespace Invetory.classes
                 }
             }
         }
-        public bool CreateProduct(string productName, int productPrice, int productQuantity)
+        public bool AddProduct(string productName, int productPrice, int productQuantity)
         {
             // insert into inventory (database columns-name) values (@declareNewVariable)
             string query = "insert into inventory (Name, QuantityStock, Price) VALUES (@getProductNameField, @getProductQuantityField, @getProductPriceField)";
@@ -110,7 +110,7 @@ namespace Invetory.classes
             }
         }
 
-        public bool DeleteProduct(int id)
+        public bool RemoveProduct(int id)
         {
             string query = "DELETE FROM inventory WHERE ProductId=" + id;
             using (MySqlConnection connectedToDatabase = new MySqlConnection(connectionString))

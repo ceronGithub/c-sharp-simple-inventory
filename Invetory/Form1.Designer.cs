@@ -73,6 +73,7 @@ namespace Invetory
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.Size = new System.Drawing.Size(776, 370);
             this.dataGridView1.TabIndex = 2;
+            this.dataGridView1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.dataGridView1_MouseUp);
             // 
             // button1
             // 
@@ -86,6 +87,7 @@ namespace Invetory
             // 
             // button2
             // 
+            this.button2.Enabled = false;
             this.button2.Location = new System.Drawing.Point(470, 39);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
@@ -148,6 +150,7 @@ namespace Invetory
             // 
             // button5
             // 
+            this.button5.Enabled = false;
             this.button5.Location = new System.Drawing.Point(551, 39);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(75, 23);

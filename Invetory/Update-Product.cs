@@ -32,9 +32,7 @@ namespace Invetory
             isSuccess = inventoryCrud.UpdateProduct(textBox2.Text, Int32.Parse(textBox4.Text), Int32.Parse(textBox3.Text), Int32.Parse(textBox1.Text)) ;
             if (isSuccess == true)
             {
-                MessageBox.Show("productId :" +textBox1.Text+ " has been updated!", "Update productId: " + textBox1.Text , MessageBoxButtons.OK, MessageBoxIcon.Information);
-                Form1 f1 = new Form1();
-                f1.Show();
+                MessageBox.Show("productId :" +textBox1.Text+ " has been updated!", "Update productId: " + textBox1.Text , MessageBoxButtons.OK, MessageBoxIcon.Information);            
                 this.Close();
             }
             else
@@ -43,5 +41,22 @@ namespace Invetory
             }
         }
 
+        private void textBox4_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            char ch = e.KeyChar;
+            if (!Char.IsDigit(ch) && ch != 8)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void textBox3_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            char ch = e.KeyChar;
+            if (!Char.IsDigit(ch) && ch != 8)
+            {
+                e.Handled = true;
+            }
+        }
     }
 }

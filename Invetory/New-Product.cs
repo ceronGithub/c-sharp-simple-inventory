@@ -29,18 +29,59 @@ namespace Invetory
             //bool variable
             bool isSucces;
 
-            //sending data to class named 'CreateProduct'
-            isSucces = inventoryCrud.CreateProduct(textBox1.Text, Int32.Parse(textBox2.Text), Int32.Parse(textBox3.Text));
-            if (isSucces == true)
+            int wholeNumberOne, wholeNumberTwo;
+            //check if price, quantity accept positive number.
+            if(int.TryParse(textBox2.Text, out wholeNumberOne) && int.TryParse(textBox3.Text, out wholeNumberTwo))
             {
-                MessageBox.Show("New product has been created!", "Created new product", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                Form1 f1 = new Form1();
-                f1.Show();
-                this.Close();
+
+                if(wholeNumberOne > 0 && wholeNumberTwo > 0)
+                {
+                    //positive here
+                    //sending data to class named 'AddProduct'
+                    isSucces = inventoryCrud.AddProduct(textBox1.Text, Int32.Parse(textBox2.Text), Int32.Parse(textBox3.Text));
+                    if (isSucces == true)
+                    {
+                        MessageBox.Show("New product has been created!", "Created new product", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        Form1 f1 = new Form1();
+                        f1.Show();
+                        this.Close();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Failed to create new product!", "Try-Again", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Price and Quantity Field doesn't accept negative integers.");
+                    textBox2.Text = textBox3.Text = "";
+                }
             }
-            else
+        }
+
+        private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            char ch = e.KeyChar;
+            /*
+             * one decimal place
+            if (ch == 46 && textBox2.Text.IndexOf('.') != -1)
             {
-                MessageBox.Show("Failed to create new product!", "Try-Again", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                e.Handled = true;
+                return;
+            }            
+            */
+            if(!Char.IsDigit(ch) && ch != 8)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void textBox3_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            char ch = e.KeyChar;
+            if (!Char.IsDigit(ch) && ch != 8)
+            {
+                e.Handled = true;
             }
         }
     }
