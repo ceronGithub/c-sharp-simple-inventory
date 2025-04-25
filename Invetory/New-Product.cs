@@ -33,24 +33,29 @@ namespace Invetory
             //check if price, quantity accept positive number.
             if(int.TryParse(textBox2.Text, out wholeNumberOne) && int.TryParse(textBox3.Text, out wholeNumberTwo))
             {
-
+                // checks if entered number is positive
                 if(wholeNumberOne > 0 && wholeNumberTwo > 0)
                 {
                     //positive here
-                    //sending data to class named 'AddProduct'
+                    //create new data method.
                     isSucces = inventoryCrud.AddProduct(textBox1.Text, Int32.Parse(textBox2.Text), Int32.Parse(textBox3.Text));
                     if (isSucces == true)
                     {
+                        //prompt message
                         MessageBox.Show("New product has been created!", "Created new product", MessageBoxButtons.OK, MessageBoxIcon.Information);                    
+
+                        // closed form
                         this.Close();
                     }
                     else
                     {
+                        //vice-versa
                         MessageBox.Show("Failed to create new product!", "Try-Again", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 else
                 {
+                    //prompt message
                     MessageBox.Show("Price and Quantity Field doesn't accept negative integers.");
                     textBox2.Text = textBox3.Text = "";
                 }
@@ -68,6 +73,8 @@ namespace Invetory
                 return;
             }            
             */
+
+            // textbox only accepts wholenumber.
             if(!Char.IsDigit(ch) && ch != 8)
             {
                 e.Handled = true;
@@ -76,6 +83,7 @@ namespace Invetory
 
         private void textBox3_KeyPress(object sender, KeyPressEventArgs e)
         {
+            // textbox only accepts wholenumber.
             char ch = e.KeyChar;
             if (!Char.IsDigit(ch) && ch != 8)
             {
