@@ -50,7 +50,7 @@ namespace Invetory.classes
                     System.Data.DataTable dataTable = new DataTable();
                     dataTable.Load(readRecords);
                     connectedToDatabase.Close();
-                    return dataTable;                
+                    return dataTable;            
                 }
             }
         }
@@ -132,6 +132,47 @@ namespace Invetory.classes
 
                 }
             }
+        }
+
+        public int GetTotalValue()
+        {
+            using (MySqlConnection connectedToDatabase = new MySqlConnection(connectionString))
+            {
+                List<int> pricess = new List<int>();
+                List<int> quantity = new List<int>();
+                
+                string queryPrice = "SELECT Price FROM inventory";
+                using (MySqlCommand command = new MySqlCommand(queryPrice, connectedToDatabase))
+                {
+                    connectedToDatabase.Open();
+                    MySqlDataReader readRecords = command.ExecuteReader();
+                    while(readRecords.Read())
+                    {
+                        pricess.Add((int) readRecords["Price"]);
+                    }                    
+                    connectedToDatabase.Close();                    
+                }
+                string queryQuantity = "SELECT QuantityStock FROM inventory";
+                using (MySqlCommand command = new MySqlCommand(queryQuantity, connectedToDatabase))
+                {
+                    connectedToDatabase.Open();
+                    MySqlDataReader readRecords = command.ExecuteReader();
+                    while (readRecords.Read())
+                    {
+                        quantity.Add((int)readRecords["QuantityStock"]);
+                    }
+                    connectedToDatabase.Close();
+                }
+
+                int subTtl = 0;
+                int ttl = 0;
+                for(int i = 0; i < pricess.Count; i++)
+                {
+                    subTtl += (quantity[i] * pricess[i]);                    
+                }
+                ttl = subTtl;
+                return ttl;
+            }            
         }
     }
 }

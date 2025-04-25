@@ -41,9 +41,7 @@ namespace Invetory
                     isSucces = inventoryCrud.AddProduct(textBox1.Text, Int32.Parse(textBox2.Text), Int32.Parse(textBox3.Text));
                     if (isSucces == true)
                     {
-                        MessageBox.Show("New product has been created!", "Created new product", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        Form1 f1 = new Form1();
-                        f1.Show();
+                        MessageBox.Show("New product has been created!", "Created new product", MessageBoxButtons.OK, MessageBoxIcon.Information);                    
                         this.Close();
                     }
                     else

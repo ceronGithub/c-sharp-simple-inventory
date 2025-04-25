@@ -35,6 +35,7 @@ namespace Invetory
             {
                 MessageBox.Show("It is connected!","Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 checkDatabaseToolStripMenuItem.BackColor = Color.Green;
+                button1.Enabled = button3.Enabled = button4.Enabled = true;
             }
             else
             {
@@ -51,7 +52,8 @@ namespace Invetory
         private void button1_Click(object sender, EventArgs e)
         {
             New_Product f2 = new New_Product();
-            f2.ShowDialog();            
+            f2.ShowDialog();
+            dataGridView1.DataSource = inventoryCrud.getData();
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -94,6 +96,13 @@ namespace Invetory
                 button2.Enabled = false;
                 button5.Enabled = false;
             }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            int ttl = 0;
+            ttl = inventoryCrud.GetTotalValue();
+            MessageBox.Show("The Over-Total of the inventory is around: " + ttl, "Inventory-Total: " + ttl, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
 }
